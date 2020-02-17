@@ -188,143 +188,146 @@ class LayoutComponent extends Component {
     } = this.props;
     return (
       <div
-        className={classNames('rdw-image-modal', popupClassName)}
-        onClick={this.stopPropagation}
-      >
-        <div className="rdw-image-modal-header">
-          {uploadEnabled && uploadCallback && (
-            <span
-              onClick={this.showImageUploadOption}
-              className="rdw-image-modal-header-option"
-            >
-              {translations['components.controls.image.fileUpload']}
+        className="rdw-image-modal-wrapper">
+        <div
+          className={classNames('rdw-image-modal', popupClassName)}
+          onClick={this.stopPropagation}
+        >
+          <div className="rdw-image-modal-header">
+            {uploadEnabled && uploadCallback && (
               <span
-                className={classNames('rdw-image-modal-header-label', {
-                  'rdw-image-modal-header-label-highlighted': uploadHighlighted,
-                })}
-              />
-            </span>
-          )}
-          {urlEnabled && (
-            <span
-              onClick={this.showImageURLOption}
-              className="rdw-image-modal-header-option"
-            >
-              {translations['components.controls.image.byURL']}
-              <span
-                className={classNames('rdw-image-modal-header-label', {
-                  'rdw-image-modal-header-label-highlighted': !uploadHighlighted,
-                })}
-              />
-            </span>
-          )}
-        </div>
-        {uploadHighlighted ? (
-          <div onClick={this.fileUploadClick}>
-            <div
-              onDragEnter={this.onDragEnter}
-              onDragOver={this.stopPropagation}
-              onDrop={this.onImageDrop}
-              className={classNames('rdw-image-modal-upload-option', {
-                'rdw-image-modal-upload-option-highlighted': dragEnter,
-              })}
-            >
-              <label
-                htmlFor="file"
-                className="rdw-image-modal-upload-option-label"
+                onClick={this.showImageUploadOption}
+                className="rdw-image-modal-header-option"
               >
-                {previewImage && imgSrc ? (
-                  <img
-                    src={imgSrc}
-                    alt={imgSrc}
-                    className="rdw-image-modal-upload-option-image-preview"
-                  />
-                ) : (
-                  imgSrc ||
-                  translations['components.controls.image.dropFileText']
-                )}
-              </label>
-            </div>
-            <input
-              type="file"
-              id="file"
-              accept={inputAccept}
-              onChange={this.selectImage}
-              className="rdw-image-modal-upload-option-input"
-            />
+                {translations['components.controls.image.fileUpload']}
+                <span
+                  className={classNames('rdw-image-modal-header-label', {
+                    'rdw-image-modal-header-label-highlighted': uploadHighlighted,
+                  })}
+                />
+              </span>
+            )}
+            {urlEnabled && (
+              <span
+                onClick={this.showImageURLOption}
+                className="rdw-image-modal-header-option"
+              >
+                {translations['components.controls.image.byURL']}
+                <span
+                  className={classNames('rdw-image-modal-header-label', {
+                    'rdw-image-modal-header-label-highlighted': !uploadHighlighted,
+                  })}
+                />
+              </span>
+            )}
           </div>
-        ) : (
-          <div className="rdw-image-modal-url-section">
-            <input
-              className="rdw-image-modal-url-input"
-              placeholder={translations['components.controls.image.enterlink']}
-              name="imgSrc"
+          {uploadHighlighted ? (
+            <div onClick={this.fileUploadClick}>
+              <div
+                onDragEnter={this.onDragEnter}
+                onDragOver={this.stopPropagation}
+                onDrop={this.onImageDrop}
+                className={classNames('rdw-image-modal-upload-option', {
+                  'rdw-image-modal-upload-option-highlighted': dragEnter,
+                })}
+              >
+                <label
+                  htmlFor="file"
+                  className="rdw-image-modal-upload-option-label"
+                >
+                  {previewImage && imgSrc ? (
+                    <img
+                      src={imgSrc}
+                      alt={imgSrc}
+                      className="rdw-image-modal-upload-option-image-preview"
+                    />
+                  ) : (
+                      imgSrc ||
+                      translations['components.controls.image.dropFileText']
+                    )}
+                </label>
+              </div>
+              <input
+                type="file"
+                id="file"
+                accept={inputAccept}
+                onChange={this.selectImage}
+                className="rdw-image-modal-upload-option-input"
+              />
+            </div>
+          ) : (
+              <div className="rdw-image-modal-url-section">
+                <input
+                  className="rdw-image-modal-url-input"
+                  placeholder={translations['components.controls.image.enterlink']}
+                  name="imgSrc"
+                  onChange={this.updateValue}
+                  onBlur={this.updateValue}
+                  value={imgSrc}
+                />
+                <span className="rdw-image-mandatory-sign">*</span>
+              </div>
+            )}
+          {altConf.present && (
+            <div className="rdw-image-modal-size">
+              <span className="rdw-image-modal-alt-lbl">Alt Text</span>
+              <input
+                onChange={this.updateValue}
+                onBlur={this.updateValue}
+                value={alt}
+                name="alt"
+                className="rdw-image-modal-alt-input"
+                placeholder="alt"
+              />
+              <span className="rdw-image-mandatory-sign">
+                {altConf.mandatory && '*'}
+              </span>
+            </div>
+          )}
+          <div className="rdw-image-modal-size">
+            &#8597;&nbsp;
+          <input
               onChange={this.updateValue}
               onBlur={this.updateValue}
-              value={imgSrc}
+              value={height}
+              name="height"
+              className="rdw-image-modal-size-input"
+              placeholder="Height"
+            />
+            <span className="rdw-image-mandatory-sign">*</span>
+          &nbsp;&#8596;&nbsp;
+          <input
+              onChange={this.updateValue}
+              onBlur={this.updateValue}
+              value={width}
+              name="width"
+              className="rdw-image-modal-size-input"
+              placeholder="Width"
             />
             <span className="rdw-image-mandatory-sign">*</span>
           </div>
-        )}
-        {altConf.present && (
-          <div className="rdw-image-modal-size">
-            <span className="rdw-image-modal-alt-lbl">Alt Text</span>
-            <input
-              onChange={this.updateValue}
-              onBlur={this.updateValue}
-              value={alt}
-              name="alt"
-              className="rdw-image-modal-alt-input"
-              placeholder="alt"
-            />
-            <span className="rdw-image-mandatory-sign">
-              {altConf.mandatory && '*'}
-            </span>
-          </div>
-        )}
-        <div className="rdw-image-modal-size">
-          &#8597;&nbsp;
-          <input
-            onChange={this.updateValue}
-            onBlur={this.updateValue}
-            value={height}
-            name="height"
-            className="rdw-image-modal-size-input"
-            placeholder="Height"
-          />
-          <span className="rdw-image-mandatory-sign">*</span>
-          &nbsp;&#8596;&nbsp;
-          <input
-            onChange={this.updateValue}
-            onBlur={this.updateValue}
-            value={width}
-            name="width"
-            className="rdw-image-modal-size-input"
-            placeholder="Width"
-          />
-          <span className="rdw-image-mandatory-sign">*</span>
+          <span className="rdw-image-modal-btn-section">
+            <button
+              className="rdw-image-modal-btn"
+              onClick={this.addImageFromState}
+              disabled={
+                !imgSrc || !height || !width || (altConf.mandatory && !alt)
+              }
+            >
+              {translations['generic.add']}
+            </button>
+            <button className="rdw-image-modal-btn" onClick={doCollapse}>
+              {translations['generic.cancel']}
+            </button>
+          </span>
+          {showImageLoading ? (
+            <div className="rdw-image-modal-spinner">
+              <Spinner />
+            </div>
+          ) : (
+              undefined
+            )}
         </div>
-        <span className="rdw-image-modal-btn-section">
-          <button
-            className="rdw-image-modal-btn"
-            onClick={this.addImageFromState}
-            disabled={
-              !imgSrc || !height || !width || (altConf.mandatory && !alt)
-            }
-          >
-            {translations['generic.add']}
-          </button>
-          <button className="rdw-image-modal-btn" onClick={doCollapse}>
-            {translations['generic.cancel']}
-          </button>
-        </span>
-        {showImageLoading ? (
-          <div className="rdw-image-modal-spinner">
-            <Spinner />
-          </div>
-        ) : (
-          undefined
-        )}
       </div>
     );
   }

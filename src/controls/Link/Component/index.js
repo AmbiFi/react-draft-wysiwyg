@@ -106,58 +106,61 @@ class LayoutComponent extends Component {
     const { linkTitle, linkTarget, linkTargetOption } = this.state;
     return (
       <div
-        className={classNames('rdw-link-modal', popupClassName)}
-        onClick={stopPropagation}
-      >
-        <label className="rdw-link-modal-label" htmlFor="linkTitle">
-          {translations['components.controls.link.linkTitle']}
-        </label>
-        <input
-          id="linkTitle"
-          className="rdw-link-modal-input"
-          onChange={this.updateValue}
-          onBlur={this.updateValue}
-          name="linkTitle"
-          value={linkTitle}
-        />
-        <label className="rdw-link-modal-label" htmlFor="linkTarget">
-          {translations['components.controls.link.linkTarget']}
-        </label>
-        <input
-          id="linkTarget"
-          className="rdw-link-modal-input"
-          onChange={this.updateValue}
-          onBlur={this.updateValue}
-          name="linkTarget"
-          value={linkTarget}
-        />
-        <label
-          className="rdw-link-modal-target-option"
-          htmlFor="openLinkInNewWindow"
+        className="rdw-link-modal-wrapper">
+        <div
+          className={classNames('rdw-link-modal', popupClassName)}
+          onClick={stopPropagation}
         >
+          <label className="rdw-link-modal-label" htmlFor="linkTitle">
+            {translations['components.controls.link.linkTitle']}
+          </label>
           <input
-            id="openLinkInNewWindow"
-            type="checkbox"
-            defaultChecked={linkTargetOption === '_blank'}
-            value="_blank"
-            onChange={this.updateTargetOption}
+            id="linkTitle"
+            className="rdw-link-modal-input"
+            onChange={this.updateValue}
+            onBlur={this.updateValue}
+            name="linkTitle"
+            value={linkTitle}
           />
-          <span>
-            {translations['components.controls.link.linkTargetOption']}
-          </span>
-        </label>
-        <span className="rdw-link-modal-buttonsection">
-          <button
-            className="rdw-link-modal-btn"
-            onClick={this.addLink}
-            disabled={!linkTarget || !linkTitle}
+          <label className="rdw-link-modal-label" htmlFor="linkTarget">
+            {translations['components.controls.link.linkTarget']}
+          </label>
+          <input
+            id="linkTarget"
+            className="rdw-link-modal-input"
+            onChange={this.updateValue}
+            onBlur={this.updateValue}
+            name="linkTarget"
+            value={linkTarget}
+          />
+          <label
+            className="rdw-link-modal-target-option"
+            htmlFor="openLinkInNewWindow"
           >
-            {translations['generic.add']}
-          </button>
-          <button className="rdw-link-modal-btn" onClick={doCollapse}>
-            {translations['generic.cancel']}
-          </button>
-        </span>
+            <input
+              id="openLinkInNewWindow"
+              type="checkbox"
+              defaultChecked={linkTargetOption === '_blank'}
+              value="_blank"
+              onChange={this.updateTargetOption}
+            />
+            <span>
+              {translations['components.controls.link.linkTargetOption']}
+            </span>
+          </label>
+          <span className="rdw-link-modal-buttonsection">
+            <button
+              className="rdw-link-modal-btn"
+              onClick={this.addLink}
+              disabled={!linkTarget || !linkTitle}
+            >
+              {translations['generic.add']}
+            </button>
+            <button className="rdw-link-modal-btn" onClick={doCollapse}>
+              {translations['generic.cancel']}
+            </button>
+          </span>
+        </div>
       </div>
     );
   }

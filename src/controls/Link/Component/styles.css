@@ -1,8 +1,22 @@
+.rdw-link-modal-wrapper {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0,0,0,.5);
+  z-index: 100;
+}
 .rdw-link-wrapper {
   display: flex;
   align-items: center;
   margin-bottom: 6px;
-  position: relative;
+  /* position: relative; */
   flex-wrap: wrap
 }
 .rdw-link-dropdown {
@@ -17,9 +31,6 @@
   margin-left: 8px;
 }
 .rdw-link-modal {
-  position: absolute;
-  top: 35px;
-  left: 5px;
   display: flex;
   flex-direction: column;
   width: 235px;

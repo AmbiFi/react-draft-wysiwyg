@@ -26,18 +26,21 @@ class LayoutComponent extends Component {
     const { config: { popupClassName, emojis } } = this.props;
     return (
       <div
-        className={classNames('rdw-emoji-modal', popupClassName)}
-        onClick={stopPropagation}
-      >
-        {
-          emojis.map((emoji, index) => (<span
-            key={index}
-            className="rdw-emoji-icon"
-            alt=""
-            onClick={this.onChange}
-          >{emoji}</span>))
-        }
-      </div>
+        className="rdw-emoji-modal-wrapper">
+        <div
+          className={classNames('rdw-emoji-modal', popupClassName)}
+          onClick={stopPropagation}
+        >
+          {
+            emojis.map((emoji, index) => (<span
+              key={index}
+              className="rdw-emoji-icon"
+              alt=""
+              onClick={this.onChange}
+            >{emoji}</span>))
+          }
+        </div>
+      </div>  
     );
   }
 
